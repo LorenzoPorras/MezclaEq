@@ -13,41 +13,28 @@ public class mezcla {
 
 	public static void main(String[] a) {
 		FileWriter fichero = null;
-        PrintWriter pw = null;
-
-
-
+		PrintWriter pw = null;
 		f0 = new File("ArchivoOrigen.txt");
 		for (int i = 0; i < N; i++)
-			f[i] = new File("ar"+i+".txt");
-	
+			f[i] = new File("ar" + i + ".txt");
+
 		// se genera un archivo secuencialmente de claves enteras
 		try {
-
-			
-			
 			fichero = new FileWriter(f0);
-            pw = new PrintWriter(fichero);
-
-            for (int i = 0; i < 10; i++)
-                pw.println   ((int) (1 + TOPE * Math.random()));
-            
-            fichero.close();
-            
-            
-
-	System.out.print("Archivo original ... ");
-		escribir(f0);
-		mezclaEqMple();
+			pw = new PrintWriter(fichero);
+			for (int i = 0; i < 10; i++)
+				pw.println((int) (1 + TOPE * Math.random()));
+			fichero.close();
+			System.out.print("Archivo original ... ");
+			escribir(f0);
+			mezclaEqMple();
 		} catch (IOException e) {
 			System.out.println("Error entrada/salida durante proceso" + " de ordenaci�n ");
 			e.printStackTrace();
 		}
 	}
 
-
-
-	//m�todo de ordenaci�n
+	// m�todo de ordenaci�n
 	public static void mezclaEqMple() {
 		int i, j, k, k1, t;
 		int anterior;
@@ -196,46 +183,38 @@ public class mezcla {
 
 	// escribe las claves del archivo
 	public static void escribir(File f) {
-	
-	
-	int[] a=new int[0];
-	 File archivo = null;
-     FileReader fr = null;
-     BufferedReader br = null;
 
-     try {
-        // Apertura del fichero y creacion de BufferedReader para poder
-        // hacer una lectura comoda (disponer del metodo readLine()).
-        archivo = new File (f.getName());
-        fr = new FileReader (archivo);
-        br = new BufferedReader(fr);
+		int[] a = new int[0];
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
 
-        // Lectura del fichero
-        String linea;
-        while((linea=br.readLine())!=null) 
-        System.out.print(linea+ " "); 
-        	
-     }
-     catch(Exception e){
-        e.printStackTrace();
-     }finally{
-        // En el finally cerramos el fichero, para asegurarnos
-        // que se cierra tanto si todo va bien como si salta 
-        // una excepcion.
-        try{                    
-           if( null != fr ){   
-              fr.close();     
-           }                  
-        }catch (Exception e2){ 
-           e2.printStackTrace();
-        }
-     }
-  }
-	
-	
-	
-	
-	
-	
-	
+		try {
+			// Apertura del fichero y creacion de BufferedReader para poder
+			// hacer una lectura comoda (disponer del metodo readLine()).
+			archivo = new File(f.getName());
+			fr = new FileReader(archivo);
+			br = new BufferedReader(fr);
+
+			// Lectura del fichero
+			String linea;
+			while ((linea = br.readLine()) != null)
+				System.out.print(linea + " ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// En el finally cerramos el fichero, para asegurarnos
+			// que se cierra tanto si todo va bien como si salta
+			// una excepcion.
+			try {
+				if (null != fr) {
+					fr.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
 }
