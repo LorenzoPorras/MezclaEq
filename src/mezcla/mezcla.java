@@ -1,8 +1,9 @@
+package mezcla;
 
 import java.io.*;
 import java.util.Arrays;
 
-public class a {
+public class mezcla {
 	static final int N = 6;
 	static final int N2 = N / 2;
 	static File f0;
@@ -16,7 +17,7 @@ public class a {
 
 
 		String[] nomf = { "ar1", "ar2", "arg3", "arg4", "ar5", "ar6" };
-		f0 = new File("ArchivoOrigen");
+		f0 = new File("ArchivoOrigen.txt");
 		for (int i = 0; i < N; i++)
 			f[i] = new File(nomf[i]+".txt");
 	
