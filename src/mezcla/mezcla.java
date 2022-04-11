@@ -16,10 +16,10 @@ public class mezcla {
         PrintWriter pw = null;
 
 
-		String[] nomf = { "ar1", "ar2", "arg3", "arg4", "ar5", "ar6" };
+
 		f0 = new File("ArchivoOrigen.txt");
 		for (int i = 0; i < N; i++)
-			f[i] = new File(nomf[i]+".txt");
+			f[i] = new File("ar"+i+".txt");
 	
 		// se genera un archivo secuencialmente de claves enteras
 		try {
