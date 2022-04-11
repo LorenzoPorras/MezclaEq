@@ -8,11 +8,12 @@ public class MezclaEquilibrada {
 	static final int N2 = N / 2;
 	static File f0;
 	static File[] f = new File[N];
-	static final int Cantidad = 10;
-	static final int TOPE = 10;
+	static final int Cantidad = 1000;
+	static final int TOPE = 1000;
 
 	public static void main(String[] args) throws IOException {
 		creacion();
+		escribir(f0);
 	}
 
 	public static void creacion() {

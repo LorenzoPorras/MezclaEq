@@ -22,7 +22,7 @@ public class mezcla {
 		try {
 			fichero = new FileWriter(f0);
 			pw = new PrintWriter(fichero);
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < NumReg; i++)
 				pw.println((int) (1 + TOPE * Math.random()));
 			fichero.close();
 			System.out.print("Archivo original ... ");
@@ -121,10 +121,16 @@ public class mezcla {
 	public static int distribuir() throws IOException {
 		int anterior, j, nt;
 		int clave;
-		DataInputStream flujo = new DataInputStream(new BufferedInputStream(new FileInputStream(f0)));
-		DataOutputStream[] flujoSalida = new DataOutputStream[N2];
+
+		FileWriter flujo = new FileWriter("cosa");
+		PrintWriter[] flujoSalida = new PrintWriter[N2];
+		;
+		
+		File archivo = new File("ArchivoOrigen.txt");
+		FileReader fr = new FileReader(archivo);
+		BufferedReader br = new BufferedReader(fr);
 		for (j = 0; j < N2; j++) {
-			flujoSalida[j] = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(f[j])));
+			flujoSalida[j] = new PrintWriter(f[j]);
 		}
 		anterior = -TOPE;
 		clave = anterior + 1;
@@ -133,17 +139,24 @@ public class mezcla {
 		// bucle termina con la excepci�n fin de fichero
 		try {
 			while (true) {
-				clave = flujo.readInt();
-				while (anterior <= clave) {
-					flujoSalida[j].writeInt(clave);
-					anterior = clave;
-					clave = flujo.readInt();
-				}
+				
+				String line;
+				while((line=br.readLine())!=null) {
+					clave = Integer.parseInt(line);
+					while (anterior <= clave) {
+						flujoSalida[j].write(clave);
+						anterior = clave;
+						clave = Integer.parseInt(line);
+					}
 
-				nt++; // nuevo tramo
-				j = (j < N2 - 1) ? j + 1 : 0; // siguiente archivo
-				flujoSalida[j].writeInt(clave);
-				anterior = clave;
+					nt++; // nuevo tramo
+					j = (j < N2 - 1) ? j + 1 : 0; // siguiente archivo
+					flujoSalida[j].write(clave);
+					anterior = clave;
+				}
+					
+				
+
 			}
 		} catch (EOFException eof) {
 			nt++; // cuenta ultimo tramo
