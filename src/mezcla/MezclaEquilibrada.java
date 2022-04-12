@@ -1,7 +1,7 @@
 package mezcla;
 
 import java.io.*;
-import java.util.Arrays;
+import java.util.*;
 
 public class MezclaEquilibrada {
 	private static int N = 6;
@@ -17,7 +17,11 @@ public class MezclaEquilibrada {
 		Ordenar(f0, f);
 	}
 
-	public static void Ordenar(File inical,File [] ayudas) {
+	public static void Ordenar(File inical, File[] ayudas) {
+
+	}
+
+	public static void repartir() {
 
 	}
 
@@ -30,8 +34,9 @@ public class MezclaEquilibrada {
 		try {
 			fichero = new FileWriter(f0);
 			pw = new PrintWriter(fichero);
+			Random rand= new Random();
 			for (int i = 0; i < Cantidad; i++)
-				pw.println((int) (1 + TOPE * Math.random()));
+				pw.println(rand.nextInt(TOPE));
 			fichero.close();
 		} catch (IOException e) {
 			e.printStackTrace();
