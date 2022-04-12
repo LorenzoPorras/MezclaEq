@@ -4,20 +4,21 @@ import java.io.*;
 import java.util.Arrays;
 
 public class MezclaEquilibrada {
-	static final int N = 6;
-	static final int N2 = N / 2;
-	static File f0;
-	static File[] f = new File[N];
-	static final int Cantidad = 10;
-	static final int TOPE = 10;
+	private static int N = 6;
+	private int N2 = N / 2;
+	private static File f0;
+	private static File[] f = new File[N];
+	private static int Cantidad = 10;
+	private static int TOPE = 10;
 
 	public static void main(String[] args) throws IOException {
 		creacion();
 		escribir(f0);
+		Ordenar(f0, f);
 	}
-	
-	public static void Ordenar() {
-		
+
+	public static void Ordenar(File inical,File [] ayudas) {
+
 	}
 
 	public static void creacion() {
