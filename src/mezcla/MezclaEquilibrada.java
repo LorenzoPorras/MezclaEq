@@ -3,8 +3,14 @@ package mezcla;
 import java.io.*;
 import java.util.*;
 
+class nopar extends Exception {
+	public nopar() {
+		super("El numero no es par");
+	}
+}
+
 public class MezclaEquilibrada {
-	private static int N = 6;
+	private static int N =2;
 	private static int N2 = N / 2;
 	private static File f0;
 	private static File[] f = new File[N];
@@ -12,9 +18,14 @@ public class MezclaEquilibrada {
 	private static int TOPE = 10;
 
 	public static void main(String[] args) throws IOException {
-		creacion();
-		escribir(f0);
-		Ordenar();
+		try {
+			creacion();
+			escribir(f0);
+			Ordenar();
+		} catch (nopar e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 	public static void Ordenar() {
@@ -23,20 +34,19 @@ public class MezclaEquilibrada {
 
 	public static void repartir() {
 		try {
-			PrintWriter	salida[] = new PrintWriter[N2];
+			PrintWriter salida[] = new PrintWriter[N2];
 			for (int i = 0; i < N2; i++) {
 				FileWriter fichero = new FileWriter(f[i]);
 				fichero.close();
-				salida[i]= new PrintWriter(f[i].getName());
-
-				
+				salida[i] = new PrintWriter(f[i].getName());
 			}
+			FileReader fr = new FileReader(f0);
+			BufferedReader br = new BufferedReader(fr);
 			int anterior = -1;
 			int pos = 0;
 			boolean bandera = true;
 			while (bandera) {
-				FileReader fr = new FileReader(f0);
-				BufferedReader br = new BufferedReader(fr);
+
 				String a;
 				while ((a = br.readLine()) != null) {
 					int b = Integer.parseInt(a);
@@ -61,22 +71,28 @@ public class MezclaEquilibrada {
 		}
 	}
 
-	public static void creacion() {
-		FileWriter fichero = null;
-		PrintWriter pw = null;
-		f0 = new File("ArchivoOrigen.txt");
-		for (int i = 0; i < N; i++)
-			f[i] = new File("ar" + i + ".txt");
-		try {
-			fichero = new FileWriter(f0);
-			pw = new PrintWriter(fichero);
-			Random rand = new Random();
-			for (int i = 0; i < Cantidad; i++)
-				pw.println(rand.nextInt(TOPE));
-			fichero.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+	public static void creacion() throws nopar {
+
+		if (N % 2 != 0 && N>2) {
+			throw new nopar();
+		} else {
+			FileWriter fichero = null;
+			PrintWriter pw = null;
+			f0 = new File("ArchivoOrigen.txt");
+			for (int i = 0; i < N; i++)
+				f[i] = new File("ar" + i + ".txt");
+			try {
+				fichero = new FileWriter(f0);
+				pw = new PrintWriter(fichero);
+				Random rand = new Random();
+				for (int i = 0; i < Cantidad; i++)
+					pw.println(rand.nextInt(TOPE));
+				fichero.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+
 	}
 
 	public static void escribir(File f) {
