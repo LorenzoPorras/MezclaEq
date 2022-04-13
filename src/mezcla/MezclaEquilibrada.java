@@ -21,7 +21,6 @@ public class MezclaEquilibrada {
 		try {
 			creacion();
 			escribir(f0);
-
 			Ordenar();
 		} catch (nopar e) {
 			System.out.println(e.getMessage());
