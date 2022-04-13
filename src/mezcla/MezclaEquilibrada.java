@@ -10,7 +10,7 @@ class nopar extends Exception {
 }
 
 public class MezclaEquilibrada {
-	private static int N =2;
+	private static int N = 2;
 	private static int N2 = N / 2;
 	private static File f0;
 	private static File[] f = new File[N];
@@ -45,6 +45,7 @@ public class MezclaEquilibrada {
 			int anterior = -1;
 			int pos = 0;
 			boolean bandera = true;
+			
 			while (bandera) {
 
 				String a;
@@ -73,7 +74,7 @@ public class MezclaEquilibrada {
 
 	public static void creacion() throws nopar {
 
-		if (N % 2 != 0 && N>2) {
+		if (N % 2 != 0 && N > 2) {
 			throw new nopar();
 		} else {
 			FileWriter fichero = null;
