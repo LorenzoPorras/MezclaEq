@@ -32,79 +32,82 @@ public class MezclaComp {
 
 	public static void Ordenar() throws IOException {
 		repartir();
-		int t = N2;
 
 		Comparable valores[] = new Comparable[N2];
 		PrintWriter salida[] = new PrintWriter[N];
-		for (int i = N2; i < N; i++) {
-			FileWriter fichero;
 
-			fichero = new FileWriter(f[i]);
-			fichero.close();
-			salida[i] = new PrintWriter(f[i].getName());
-
-		}
-		boolean[] activos = new boolean[N2];
-		BufferedReader[] lecturas = new BufferedReader[N2];
-		for (int i = 0; i < N2; i++) {
-			FileReader fr = new FileReader(f[i].getName());
-			lecturas[i] = new BufferedReader(fr);
-
-		}
-		for (int i = 0; i < valores.length; i++) {
-			String a = lecturas[i].readLine();
-			if (a != null) {
-				valores[i] = a;
-				activos[i] = true;
-
-			} else {
-				valores[i] = a;
-				activos[i] = false;
-			}
-		}
+		int t = 0;
 		do {
+			int escritura = N2;
+			for (int i = N2; i < N; i++) {
+				FileWriter fichero;
 
-			// Falta arreglar esto
-			int dato = pos(valores, activos);
+				fichero = new FileWriter(f[i]);
+				fichero.close();
+				salida[i] = new PrintWriter(f[i].getName());
 
-			salida[N2].println(valores[dato]);
+			}
+			boolean[] activos = new boolean[N2];
+			BufferedReader[] lecturas = new BufferedReader[N2];
+			for (int i = 0; i < N2; i++) {
+				FileReader fr = new FileReader(f[i].getName());
+				lecturas[i] = new BufferedReader(fr);
 
-			Comparable sig = lecturas[dato].readLine();
-			valores[dato] = sig;
-			
-			
-			
-			t--;
+			}
+			for (int i = 0; i < valores.length; i++) {
+				String a = lecturas[i].readLine();
+				if (a != null) {
+					valores[i] = a;
+					activos[i] = true;
 
-		} while (t > 0);
+				} else {
+					valores[i] = a;
+					activos[i] = false;
+				}
+			}
 
-		for (int i = N2; i < salida.length; i++) {
-			salida[i].close();
-		}
+			while (finDeTramo(activos)) {
+				t++;
+
+				int dato = pos(valores, activos);
+
+				salida[escritura].println(valores[dato]);
+
+				Comparable sig = lecturas[dato].readLine();
+				valores[dato] = sig;
+			}
+
+			for (int i = N2; i < salida.length; i++) {
+				salida[i].close();
+			}
+			for (int i = 0; i < lecturas.length; i++) {
+				lecturas[i].close();
+			}
+			t = 0;
+
+		} while (t > 1);
 
 	}
 
-	public static int verificar(boolean[] a) {
-		int cont = 0;
-		for (int i = 0; i < a.length; i++) {
-			if (a[i] == true)
-				cont = cont + 1;
-		}
-
-		return cont;
-
+	public static boolean finDeTramo(boolean[] a) {
+		int i = 0;
+		while (i < a.length && a[i] == false)
+			i++;
+		if (i < a.length)
+			return true;
+		else
+			return false;
 	}
 
 	public static int pos(Comparable[] a, boolean[] b) {
 		int pos = 0;
-	int n=0 ;while(n<a.length && a[n]==null)n++;
+		int n = 0;
+		while (n < a.length && a[n] == null)
+			n++;
 		Comparable anterior = a[n];
-		
-		
-		
-		
+
 		for (int i = 0; i < a.length; i++) {
-			
+
 			if (a[i] != null) {
 				if (anterior.compareTo(a[i]) >= 0 && b[i] == true) {
 					anterior = a[i];
