@@ -8,7 +8,7 @@ public class MzclaMultiple {
 	static File f0;
 	static File[] f = new File[N];
 	static final int NumReg = 10;
-	static final int TOPE = 999;
+	static final int TOPE = 10;
 
 	public static void main(String[] a) {
 		String[] nomf = { "ar1", "ar2", "ar3", "ar4", "ar5", "ar6" };
