@@ -14,7 +14,7 @@ public class MezclaEquilibrada {
 	private static int N2 = N / 2;
 	private static File f0;
 	private static File[] f = new File[N];
-	private static int Cantidad = 10;
+	private static int Cantidad = 4;
 	private static int TOPE = 10;
 
 	public static void main(String[] args) {
@@ -26,6 +26,7 @@ public class MezclaEquilibrada {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
 			e.printStackTrace();
+
 		}
 
 	}
@@ -57,23 +58,44 @@ public class MezclaEquilibrada {
 			}
 
 			for (int i = 0; i < valores.length; i++) {
-				valores[i] = Integer.parseInt(lecturas[i].readLine());
+				String valor = lecturas[i].readLine();
+				if (valor != null)
+					valores[i] = Integer.parseInt(valor);
+				else {
+					valores[i] = -1;
+					activos[i] = false;
+				}
+				
 			}
 
-			while (verificar(activos)) {
-				
-				salida[pos].println(valores[pos(valores, activos)]);
-			
-				valores[2]=Integer.parseInt(lecturas[2].readLine());			}
+			while (verificar(activos) > 0) {
+				int posValor = pos(valores, activos);
+				salida[pos].println(valores[posValor]);
+				String nuevo = lecturas[posValor].readLine();
+				if (nuevo != null)
+					valores[posValor] = Integer.parseInt(nuevo);
+				if (nuevo == null) {
+					activos[posValor] = false;
+					valores[posValor] = -1;
+				}
 
-			pos = (pos < N2 - 1) ? pos + 1 : 0;
-			
-			
-			t--;
+			}
+// DE AQUI EN ADELANTE HAY QUE CAMBIAR COSAS
+			pos = (pos < N - 1) ? pos + 1 : 0;
+			for (int i = 0; i < N2; i++) {
+				File a;
+				a = f[i];
+				f[i] = f[i + N2];
+				f[i + N2] = a;
+			}
+			escribir(f[3]);
+			escribir(f[1]);
+			escribir(f[2]);
 			for (int i = 0; i < N2; i++) {
 				lecturas[i].close();
 			}
 
+			t--;
 		} while (t > 1);
 
 		for (int i = N2; i < salida.length; i++) {
@@ -82,23 +104,28 @@ public class MezclaEquilibrada {
 
 	}
 
-	public static boolean verificar(boolean[] a) {
+	public static int verificar(boolean[] a) {
+		int cont = 0;
+		for (int i = 0; i < a.length; i++) {
+			if (a[i] == true)
+				cont = cont + 1;
+		}
 
-		int i = 0;
-		while (i < a.length && a[i] == true)
-			i++;
-		if (i == a.length)
-			return true;
-		else
-			return false;
+		return cont;
+
 	}
 
 	public static int pos(int[] a, boolean[] b) {
-		int pos=0;
-		int anterior = -1;
+		int pos = 0;
+		int anterior = a[0];
 		for (int i = 0; i < a.length; i++) {
-			if (anterior <= a[i] && b[i] == true)
-				pos=pos++;		}
+			if(a[i]==-1)anterior=a[i];
+			if (anterior > a[i] && b[i] == true) {
+				anterior = a[i];
+				pos = i;
+			}
+
+		}
 		return pos;
 
 	}
