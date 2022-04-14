@@ -64,6 +64,7 @@ public class MezclaComp {
 		}
 		do {
 
+			// Falta arreglar esto
 			int dato = pos(valores, activos);
 
 			salida[N2].println(valores[dato]);
