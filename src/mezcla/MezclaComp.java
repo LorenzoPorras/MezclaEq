@@ -22,7 +22,7 @@ public class MezclaComp {
 		try {
 			creacion(a); 
 			escribir(f0);
-			repartir();
+			Ordenar();
 			
 
 		} catch (nopar | IOException e) {
@@ -35,8 +35,8 @@ public class MezclaComp {
 	public static void Ordenar() throws IOException {
 		repartir();
 		int t = N2;
-		int pos = 3;
-		int valores[] = new int[N2];
+	
+		Comparable valores[] = new Comparable[N2];
 		PrintWriter salida[] = new PrintWriter[N];
 		for (int i = N2; i < N; i++) {
 			FileWriter fichero;
@@ -61,41 +61,16 @@ public class MezclaComp {
 			for (int i = 0; i < valores.length; i++) {
 				String valor = lecturas[i].readLine();
 				if (valor != null)
-					valores[i] = Integer.parseInt(valor);
+					valores[i] = valor;
 				else {
 
 					activos[i] = false;
 				}
 
 			}
+			int pos= pos(valores, activos);
 
-			while (verificar(activos) > 0) {
-				int posValor = pos(valores, activos);
-				salida[pos].println(valores[posValor]);
-				String nuevo = lecturas[posValor].readLine();
-				if (nuevo != null)
-					valores[posValor] = Integer.parseInt(nuevo);
-				if (nuevo == null) {
-					activos[posValor] = false;
-					valores[posValor] = 0;
-				}
 
-			}
-			// DE AQUI EN ADELANTE HAY QUE CAMBIAR COSAS
-
-			pos = (pos < N - 1) ? pos + 1 : 0;
-			for (int i = 0; i < N2; i++) {
-				File a;
-				a = f[i];
-				f[i] = f[i + N2];
-				f[i + N2] = a;
-			}
-
-			for (int i = 0; i < N2; i++) {
-				lecturas[i].close();
-			}
-
-			t--;
 		} while (t > 1);
 
 		for (int i = N2; i < salida.length; i++) {
@@ -115,11 +90,11 @@ public class MezclaComp {
 
 	}
 
-	public static int pos(int[] a, boolean[] b) {
+	public static int pos(Comparable[] a, boolean[] b) {
 		int pos = 0;
-		int anterior = a[0];
+		Comparable anterior = a[0];
 		for (int i = 0; i < a.length; i++) {
-			if (anterior > a[i] && b[i] == true) {
+			if (anterior.compareTo(a[i]) > 0 && b[i] == true) {
 				anterior = a[i];
 				pos = i;
 			}
