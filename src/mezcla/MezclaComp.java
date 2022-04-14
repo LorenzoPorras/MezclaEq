@@ -9,7 +9,8 @@ class nopar extends Exception {
 	}
 }
 
-public class MezclaEquilibrada {
+public class MezclaComp {
+
 	private static int N = 6;
 	private static int N2 = N / 2;
 	private static File f0;
@@ -18,16 +19,7 @@ public class MezclaEquilibrada {
 	private static int TOPE = 11;
 
 	public static void main(String[] args) {
-		try {
-			creacion();
-			escribir(f0);
-//			Ordenar();
-		} catch (nopar e) {
-			System.out.println(e.getMessage());
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
+	
 
 	}
 
@@ -62,10 +54,10 @@ public class MezclaEquilibrada {
 				if (valor != null)
 					valores[i] = Integer.parseInt(valor);
 				else {
-					
+
 					activos[i] = false;
 				}
-				
+
 			}
 
 			while (verificar(activos) > 0) {
@@ -80,18 +72,8 @@ public class MezclaEquilibrada {
 				}
 
 			}
-// DE AQUI EN ADELANTE HAY QUE CAMBIAR COSAS
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			// DE AQUI EN ADELANTE HAY QUE CAMBIAR COSAS
+
 			pos = (pos < N - 1) ? pos + 1 : 0;
 			for (int i = 0; i < N2; i++) {
 				File a;
@@ -99,7 +81,7 @@ public class MezclaEquilibrada {
 				f[i] = f[i + N2];
 				f[i + N2] = a;
 			}
-		
+
 			for (int i = 0; i < N2; i++) {
 				lecturas[i].close();
 			}
@@ -125,7 +107,7 @@ public class MezclaEquilibrada {
 	}
 
 	public static int pos(int[] a, boolean[] b) {
-		int pos=0;
+		int pos = 0;
 		int anterior = a[0];
 		for (int i = 0; i < a.length; i++) {
 			if (anterior > a[i] && b[i] == true) {
@@ -184,7 +166,7 @@ public class MezclaEquilibrada {
 			pw = new PrintWriter(fichero);
 			Random rand = new Random();
 			for (int i = 0; i < Cantidad; i++)
-				pw.println(new Persona1("nombre",2));;
+				pw.println(rand.nextInt(TOPE));
 
 			fichero.close();
 
