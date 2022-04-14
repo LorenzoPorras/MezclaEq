@@ -3,12 +3,6 @@ package mezcla;
 import java.io.*;
 import java.util.*;
 
-class nopar extends Exception {
-	public nopar() {
-		super("El numero no es par");
-	}
-}
-
 public class MezclaEquilibrada {
 	private static int N = 6;
 	private static int N2 = N / 2;

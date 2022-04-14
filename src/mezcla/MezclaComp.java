@@ -1,7 +1,6 @@
 package mezcla;
 
 import java.io.*;
-import java.util.*;
 
 class nopar extends Exception {
 	public nopar() {
@@ -15,11 +14,21 @@ public class MezclaComp {
 	private static int N2 = N / 2;
 	private static File f0;
 	private static File[] f = new File[N];
-	private static int Cantidad = 5;
-	private static int TOPE = 11;
 
 	public static void main(String[] args) {
-	
+		Comparable[] a = { new Persona1("Lorenzo", 2), new Persona1("Lorenzo", 1), new Persona1("Lorenzo", 8),
+				new Persona1("Lorenzo", 0), new Persona1("Lorenzo", 7),new Persona1("Lorenzo", 7),new Persona1("Lorenzo", 7) };
+
+		try {
+			creacion(a); 
+			escribir(f0);
+			repartir();
+			
+
+		} catch (nopar | IOException e) {
+
+			e.printStackTrace();
+		}
 
 	}
 
@@ -130,18 +139,20 @@ public class MezclaComp {
 		}
 		FileReader fr = new FileReader(f0);
 		BufferedReader br = new BufferedReader(fr);
-		int anterior = -1;
+		Comparable inicial = br.readLine();
+	
 		int pos = 0;
+		salida[pos].println(inicial);
 		String a;
 		while ((a = br.readLine()) != null) {
-			int b = Integer.parseInt(a);
-			if (anterior <= b) {
-				salida[pos].println(b);
-				anterior = b;
+			
+			if (inicial.compareTo(a) <= 0) {
+				salida[pos].println(a);
+				inicial = a;
 			} else {
 				pos = (pos < N2 - 1) ? pos + 1 : 0;
-				salida[pos].println(b);
-				anterior = b;
+				salida[pos].println(a);
+				inicial = a;
 			}
 		}
 		for (int i = 0; i < salida.length; i++) {
@@ -151,7 +162,7 @@ public class MezclaComp {
 
 	}
 
-	public static void creacion() throws nopar, IOException {
+	public static void creacion(Comparable[] a) throws nopar, IOException {
 
 		if (N % 2 != 0 && N > 2) {
 			throw new nopar();
@@ -164,9 +175,9 @@ public class MezclaComp {
 
 			fichero = new FileWriter(f0);
 			pw = new PrintWriter(fichero);
-			Random rand = new Random();
-			for (int i = 0; i < Cantidad; i++)
-				pw.println(rand.nextInt(TOPE));
+
+			for (int i = 0; i < a.length; i++)
+				pw.println(a[i]);
 
 			fichero.close();
 
