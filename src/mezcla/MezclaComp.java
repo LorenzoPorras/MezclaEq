@@ -69,6 +69,12 @@ public class MezclaComp {
 			while (finDeTramo(activos)) {
 				t++;
 
+				
+				
+				
+				
+				
+				
 				int dato = pos(valores, activos);
 
 				salida[escritura].println(valores[dato]);
@@ -83,10 +89,15 @@ public class MezclaComp {
 			for (int i = 0; i < lecturas.length; i++) {
 				lecturas[i].close();
 			}
-			t = 0;
+			if(verificar(valores))t=t;else; t=0;
 
-		} while (t > 1);
+		} while (t > 0);
 
+	}
+	public static boolean verificar(Comparable[] a) {
+		int i=0;while(i<a.length && a[i]!=null)i++;
+		if(i<a.length)return true;else return false;
+		
 	}
 
 	public static boolean finDeTramo(boolean[] a) {
