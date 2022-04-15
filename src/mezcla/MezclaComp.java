@@ -47,10 +47,10 @@ public class MezclaComp {
 
 		}
 
-		int t;
+		int t = 1;
 		int escritura = N2;
-		do {
 
+		while (t > 0) {
 			BufferedReader[] lecturas = new BufferedReader[N2];
 			for (int i = 0; i < N2; i++) {
 				FileReader fr = new FileReader(f[i].getName());
@@ -62,71 +62,74 @@ public class MezclaComp {
 				salida[i] = new PrintWriter(f[i].getName());
 
 			}
+			escritura = N2;
 
-			t = 0;
-
-			if (verificarExistencia(valores) == false) {
-				for (int i = 0; i < valores.length; i++) {
-					String a = lecturas[i].readLine();
-					if (a != null) {
-						valores[i] = a;
-						activos[i] = true;
-
-					} else {
-						valores[i] = a;
-						activos[i] = false;
-					}
-				}
-			}
-
-			while (finDeTramo(activos)) {
-				t++;
-
-				int dato = pos(valores, activos);
-				if (dato >= 0) {
-					Comparable sig = lecturas[dato].readLine();
-
-					if (sig == null || valores[dato].compareTo(sig) > 0) {
-						salida[escritura].println(valores[dato]);
-						valores[dato] = sig;
-						activos[dato] = false;
-
-					} else if (valores[dato].compareTo(sig) <= 0) {
-						salida[escritura].println(valores[dato]);
-						valores[dato] = sig;
-					}
-				}
-
-			}
-			if (t > 0) {
-
-				if (verificar(valores)) {
-					t = t;
-					for (int i = 0; i < activos.length; i++) {
-						if (valores[i] != null)
+			while (escritura < N) {
+				if (verificarExistencia(valores) == false) {
+					for (int i = 0; i < valores.length; i++) {
+						String a = lecturas[i].readLine();
+						if (a != null) {
+							valores[i] = a;
 							activos[i] = true;
-					}
-					escritura = (escritura < N - 1) ? escritura + 1 : N2;
 
-				} else if (escritura == N2) {
-					for (int i = N2; i < salida.length; i++) {
-						salida[i].close();
-					}
-					for (int i = 0; i < lecturas.length; i++) {
-						lecturas[i].close();
-					}
-
-					for (int i = 0; i < N2; i++) {
-						File a;
-						a = f[i];
-						f[i] = f[i + N2];
-						f[i + N2] = a;
+						} else {
+							valores[i] = a;
+							activos[i] = false;
+						}
 					}
 				}
-			} else
-				t = 0;
 
-		} while (t > 0);
+				while (finDeTramo(activos)) {
+					t++;
+
+					int dato = pos(valores, activos);
+					if (dato >= 0) {
+						Comparable sig = lecturas[dato].readLine();
+
+						if (sig == null || valores[dato].compareTo(sig) > 0) {
+							salida[escritura].println(valores[dato]);
+							valores[dato] = sig;
+							activos[dato] = false;
+
+						} else if (valores[dato].compareTo(sig) <= 0) {
+							salida[escritura].println(valores[dato]);
+							valores[dato] = sig;
+						}
+					}
+
+				}
+
+				if (t > 0) {
+
+					if (verificar(valores)) {
+						t = t;
+						for (int i = 0; i < activos.length; i++) {
+							if (valores[i] != null)
+								activos[i] = true;
+						}
+						escritura = (escritura < N - 1) ? escritura + 1 : N2;
+
+					} else if (escritura <= N ) {
+						for (int i = N2; i < salida.length; i++) {
+							salida[i].close();
+						}
+						for (int i = 0; i < lecturas.length; i++) {
+							lecturas[i].close();
+						}
+
+						for (int i = 0; i < N2; i++) {
+							File a;
+							a = f[i];
+							f[i] = f[i + N2];
+							f[i + N2] = a;
+							
+						}
+						escritura=N;
+					}
+				} else
+					t = 0;
+			}
+		}
 
 	}
 
