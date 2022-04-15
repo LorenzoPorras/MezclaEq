@@ -220,8 +220,7 @@ public class MezclaComp {
 	}
 
 	public static void creacion(Comparable[] a) throws nopar, IOException, inicalNulo {
-		System.out.println(a.length);
-		if (a.length ==0 || a == null)
+		if (a.length == 0 || a == null)
 			throw new inicalNulo();
 		if (N % 2 != 0 && N > 2) {
 			throw new nopar();
