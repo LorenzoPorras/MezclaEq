@@ -1,6 +1,7 @@
 package mezcla;
 
 import java.io.*;
+import java.util.Arrays;
 
 class nopar extends Exception {
 	public nopar() {
@@ -22,14 +23,33 @@ public class MezclaComp {
 	private static File[] f = new File[N];
 
 	public static void main(String[] args) {
-		Comparable[] a = {};
 
+		Comparable[] a = {};
+		long timeInicio;
+		long timeFin;
+		timeInicio = System.currentTimeMillis();
+
+		for (int i = 0; i < 100; i++) {
+			a = Arrays.copyOf(a, a.length + 1);
+			a[i] = new Persona1("cualqueiraxd", (int) (1 + 10 * Math.random()));
+		}
+		timeFin = System.currentTimeMillis();
+		System.out.println("Escrito en : " + (timeFin - timeInicio));
 		try {
+
+			timeInicio = System.currentTimeMillis();
 			creacion(a);
-			escribir(f0);
+			timeFin = System.currentTimeMillis();
+			System.out.println("Repartido en : " + (timeFin - timeInicio));
+
+			timeInicio = System.currentTimeMillis();
 			Ordenar();
-			System.out.println();
-			escribir(f[0]);
+			timeFin = System.currentTimeMillis();
+			System.out.println("Ordenado en : " + (timeFin - timeInicio));
+
+			System.out.println(f0.length());
+
+			System.out.println(f[0].length());
 
 		} catch (nopar | IOException | inicalNulo e) {
 
@@ -131,7 +151,7 @@ public class MezclaComp {
 
 						}
 						escritura = N;
-						if (f0.length() == f[0].length())
+						if (f0.length() == f[N2].length())
 							t = 0;
 					}
 				}
