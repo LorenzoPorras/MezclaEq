@@ -16,14 +16,14 @@ public class MezclaComp {
 	private static File[] f = new File[N];
 
 	public static void main(String[] args) {
-		Comparable[] a = { new Persona1("Lorenzo", 2), new Persona1("Lorenzo", 1), new Persona1("Lorenzo", 8),
-				new Persona1("Lorenzo", 2), new Persona1("Lorenzo", 1), new Persona1("Lorenzo", 2),
-				new Persona1("Lorenzo", 1) };
+		Comparable[] a = { new Persona1("Lorenzo", 2) };
 
 		try {
 			creacion(a);
 			escribir(f0);
 			Ordenar();
+			System.out.println();
+			escribir(f[0]);
 
 		} catch (nopar | IOException e) {
 
@@ -33,7 +33,7 @@ public class MezclaComp {
 	}
 
 	public static void Ordenar() throws IOException {
-		repartir();
+		int parada = repartir();
 
 		Comparable valores[] = new Comparable[N2];
 		PrintWriter salida[] = new PrintWriter[N];
@@ -101,7 +101,7 @@ public class MezclaComp {
 
 				if (t > 0) {
 
-					if (verificar(valores)) {
+					if (verificarExistencia(valores)) {
 						t = t;
 						for (int i = 0; i < activos.length; i++) {
 							if (valores[i] != null)
@@ -109,7 +109,7 @@ public class MezclaComp {
 						}
 						escritura = (escritura < N - 1) ? escritura + 1 : N2;
 
-					} else if (escritura <= N ) {
+					} else if (escritura <= N) {
 						for (int i = N2; i < salida.length; i++) {
 							salida[i].close();
 						}
@@ -122,25 +122,16 @@ public class MezclaComp {
 							a = f[i];
 							f[i] = f[i + N2];
 							f[i + N2] = a;
-							
+							System.out.println(f0.length());
+
 						}
-						escritura=N;
+						escritura = N;
+						if (f0.length() == f[0].length())
+							t = 0;
 					}
-				} else
-					t = 0;
+				}
 			}
 		}
-
-	}
-
-	public static boolean verificar(Comparable[] a) {
-		int i = 0;
-		while (i < a.length && a[i] == null)
-			i++;
-		if (i < a.length)
-			return true;
-		else
-			return false;
 
 	}
 
@@ -189,7 +180,7 @@ public class MezclaComp {
 
 	}
 
-	public static void repartir() throws IOException {
+	public static int repartir() throws IOException {
 
 		PrintWriter salida[] = new PrintWriter[N];
 		for (int i = 0; i < N; i++) {
@@ -200,7 +191,7 @@ public class MezclaComp {
 		FileReader fr = new FileReader(f0);
 		BufferedReader br = new BufferedReader(fr);
 		Comparable inicial = br.readLine();
-
+		int cantidad = 0;
 		int pos = 0;
 		salida[pos].println(inicial);
 		String a;
@@ -214,12 +205,13 @@ public class MezclaComp {
 				salida[pos].println(a);
 				inicial = a;
 			}
+			cantidad++;
 		}
 		for (int i = 0; i < salida.length; i++) {
 			salida[i].close();
 		}
 		br.close();
-
+		return cantidad;
 	}
 
 	public static void creacion(Comparable[] a) throws nopar, IOException {
