@@ -8,6 +8,12 @@ class nopar extends Exception {
 	}
 }
 
+class inicalNulo extends Exception {
+	public inicalNulo() {
+		super("El vector inicial es nulo");
+	}
+}
+
 public class MezclaComp {
 
 	private static int N = 6;
@@ -16,7 +22,7 @@ public class MezclaComp {
 	private static File[] f = new File[N];
 
 	public static void main(String[] args) {
-		Comparable[] a = { new Persona1("Lorenzo", 2) };
+		Comparable[] a = {};
 
 		try {
 			creacion(a);
@@ -25,9 +31,9 @@ public class MezclaComp {
 			System.out.println();
 			escribir(f[0]);
 
-		} catch (nopar | IOException e) {
+		} catch (nopar | IOException | inicalNulo e) {
 
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}
@@ -122,7 +128,6 @@ public class MezclaComp {
 							a = f[i];
 							f[i] = f[i + N2];
 							f[i + N2] = a;
-							System.out.println(f0.length());
 
 						}
 						escritura = N;
@@ -214,8 +219,10 @@ public class MezclaComp {
 		return cantidad;
 	}
 
-	public static void creacion(Comparable[] a) throws nopar, IOException {
-
+	public static void creacion(Comparable[] a) throws nopar, IOException, inicalNulo {
+		System.out.println(a.length);
+		if (a.length ==0 || a == null)
+			throw new inicalNulo();
 		if (N % 2 != 0 && N > 2) {
 			throw new nopar();
 		} else {
