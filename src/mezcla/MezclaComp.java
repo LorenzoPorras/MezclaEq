@@ -29,9 +29,9 @@ public class MezclaComp {
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			a = Arrays.copyOf(a, a.length + 1);
-			a[i] = new Persona1("cualqueiraxd", (int) (1 + 10 * Math.random()));
+			a[i] = new Persona1("Xd",(int) (1 + 10 * Math.random()));
 		}
 		timeFin = System.currentTimeMillis();
 		System.out.println("Escrito en : " + (timeFin - timeInicio));
@@ -50,7 +50,7 @@ public class MezclaComp {
 			System.out.println(f0.length());
 
 			System.out.println(f[0].length());
-
+			escribir(f[N2]);
 		} catch (nopar | IOException | inicalNulo e) {
 
 			System.out.println(e.getMessage());
