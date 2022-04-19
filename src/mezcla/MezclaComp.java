@@ -30,7 +30,7 @@ public class MezclaComp {
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-		for (int i = 0; i < 45; i++) {
+		for (int i = 0; i < 200000; i++) {
 			a = Arrays.copyOf(a, a.length + 1);
 			a[i] = new Persona1("Xd", (int) (1 + 1000 * Math.random()));
 		}
