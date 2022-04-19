@@ -20,6 +20,7 @@ public class MezclaComp {
 	private static int N = 6;
 	private static int N2 = N / 2;
 	private static File f0;
+	private static File fRespuesta;
 	private static File[] f = new File[N];
 
 	public static void main(String[] args) {
@@ -29,10 +30,11 @@ public class MezclaComp {
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 45; i++) {
 			a = Arrays.copyOf(a, a.length + 1);
-			a[i] = new Persona1("Xd",(int) (1 + 10 * Math.random()));
+			a[i] = new Persona1("Xd", (int) (1 + 1000 * Math.random()));
 		}
+
 		timeFin = System.currentTimeMillis();
 		System.out.println("Escrito en : " + (timeFin - timeInicio));
 		try {
@@ -47,10 +49,10 @@ public class MezclaComp {
 			timeFin = System.currentTimeMillis();
 			System.out.println("Ordenado en : " + (timeFin - timeInicio));
 
-			System.out.println(f0.length());
+//			escribir(f0);
+//			System.out.println();
+//			escribir(f[N2]);
 
-			System.out.println(f[0].length());
-			escribir(f[N2]);
 		} catch (nopar | IOException | inicalNulo e) {
 
 			System.out.println(e.getMessage());
@@ -151,8 +153,11 @@ public class MezclaComp {
 
 						}
 						escritura = N;
-						if (f0.length() == f[N2].length())
+						if (f0.length() == f[N2].length()) {
 							t = 0;
+							Respuesta();
+						}
+
 					}
 				}
 			}
@@ -237,6 +242,23 @@ public class MezclaComp {
 		}
 		br.close();
 		return cantidad;
+	}
+
+	public static void Respuesta() throws IOException {
+	
+		fRespuesta = new File("Respuesta.txt");
+		FileWriter fichero = new FileWriter(fRespuesta);
+		fichero.close();
+		PrintWriter pw = new PrintWriter(fRespuesta);
+		FileReader fr = new FileReader(f[N2]);
+		BufferedReader br = new BufferedReader(fr);
+		String a;
+		while ((a = br.readLine()) != null) {
+
+			pw.println(a);
+		}
+		pw.close();
+		br.close();
 	}
 
 	public static void creacion(Comparable[] a) throws nopar, IOException, inicalNulo {
