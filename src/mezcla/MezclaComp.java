@@ -24,7 +24,7 @@ public class MezclaComp {
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 50; i++) {
 			a = Arrays.copyOf(a, a.length + 1);
 			a[i] = "Xd-" + (int) (1 + 10 * Math.random());
 		}
