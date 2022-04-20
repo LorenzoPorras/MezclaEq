@@ -30,9 +30,9 @@ public class MezclaComp {
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 10; i++) {
 			a = Arrays.copyOf(a, a.length + 1);
-			a[i] = "Xd-"+ (int) (1 + 10 * Math.random());
+			a[i] = "Xd-" + (int) (1 + 10 * Math.random());
 		}
 
 		timeFin = System.currentTimeMillis();
@@ -51,7 +51,10 @@ public class MezclaComp {
 
 //			escribir(f0);
 //			System.out.println();
-			escribir(fRespuesta);
+//			escribir(fRespuesta);
+			for (int i = 0; i < f.length; i++) {
+				f[i].delete();
+			}
 
 		} catch (nopar | IOException | inicalNulo e) {
 
@@ -152,7 +155,9 @@ public class MezclaComp {
 
 						}
 						escritura = N;
-						if (f0.length() == f[N2].length()) {
+						long x = f0.length();
+						long y = f[N2].length();
+						if (x == y) {
 							t = 0;
 							Respuesta();
 						}
@@ -186,26 +191,46 @@ public class MezclaComp {
 	}
 
 	public static int pos(String[] a, boolean[] b) {
-		int pos = 0;
-		int n = 0;
-		while (n < a.length && b[n] != true)
-			n++;
-		if (n < a.length) {
-			String anterior = a[n];
 
-			for (int i = 0; i < a.length; i++) {
+		int pos = -1;
+		String anterior = null;
+		for (int i = 0; i < a.length; i++) {
+			if (a[i] != null) {
 
-				if (a[i] != null) {
-					if (anterior.compareTo(a[i]) >= 0 && b[i] == true) {
-						anterior = a[i];
-						pos = i;
-					}
+				if (anterior != null && anterior.compareTo(a[i]) >= 0 && b[i] == true) {
+					anterior = a[i];
+					pos = i;
+
+				} else if (anterior == null && b[i] == true) {
+					anterior = a[i];
+					pos = i;
 				}
 
 			}
-			return pos;
-		} else
-			return -1;
+
+		}
+		return pos;
+
+//		int pos = 0;
+//		int n = 0;
+//		while (n < a.length && b[n] != true)
+//			n++;
+//		if (n < a.length) {
+//			String anterior = a[n];
+//
+//			for (int i = 0; i < a.length; i++) {
+//
+//				if (a[i] != null) {
+//					if (anterior.compareTo(a[i]) >= 0 && b[i] == true) {
+//						anterior = a[i];
+//						pos = i;
+//					}
+//				}
+//
+//			}
+//			return pos;
+//		} else
+//			return -1;
 
 	}
 
@@ -266,20 +291,17 @@ public class MezclaComp {
 		if (N % 2 != 0 && N > 2) {
 			throw new nopar();
 		} else {
-			FileWriter fichero = null;
-			PrintWriter pw = null;
+
 			f0 = new File("ArchivoOrigen.txt");
 			for (int i = 0; i < N; i++)
 				f[i] = new File("ar" + i + ".txt");
-
+			FileWriter fichero = null;
+			PrintWriter pw = null;
 			fichero = new FileWriter(f0);
 			pw = new PrintWriter(fichero);
-
 			for (int i = 0; i < a.length; i++)
 				pw.println(a[i]);
-
 			fichero.close();
-
 		}
 
 	}
