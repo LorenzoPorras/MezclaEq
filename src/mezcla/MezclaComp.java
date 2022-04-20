@@ -9,12 +9,6 @@ class nopar extends Exception {
 	}
 }
 
-class inicalNulo extends Exception {
-	public inicalNulo() {
-		super("El vector inicial es nulo");
-	}
-}
-
 public class MezclaComp {
 
 	private static int N = 6;
@@ -56,7 +50,7 @@ public class MezclaComp {
 				f[i].delete();
 			}
 
-		} catch (nopar | IOException | inicalNulo e) {
+		} catch (nopar | IOException e) {
 
 			System.out.println(e.getMessage());
 		}
@@ -78,10 +72,9 @@ public class MezclaComp {
 
 		}
 
-		int t = 1;
 		int escritura = N2;
 
-		while (t > 0) {
+		while (f0.length() != f[N2].length()) {
 			BufferedReader[] lecturas = new BufferedReader[N2];
 			for (int i = 0; i < N2; i++) {
 				FileReader fr = new FileReader(f[i].getName());
@@ -129,40 +122,36 @@ public class MezclaComp {
 
 				}
 
-				if (t > 0) {
+				if (verificarExistencia(valores)) {
 
-					if (verificarExistencia(valores)) {
-						t = t;
-						for (int i = 0; i < activos.length; i++) {
-							if (valores[i] != null)
-								activos[i] = true;
-						}
-						escritura = (escritura < N - 1) ? escritura + 1 : N2;
+					for (int i = 0; i < activos.length; i++) {
+						if (valores[i] != null)
+							activos[i] = true;
+					}
+					escritura = (escritura < N - 1) ? escritura + 1 : N2;
 
-					} else if (escritura <= N) {
-						for (int i = N2; i < salida.length; i++) {
-							salida[i].close();
-						}
-						for (int i = 0; i < lecturas.length; i++) {
-							lecturas[i].close();
-						}
+				} else if (escritura <= N) {
+					for (int i = N2; i < salida.length; i++) {
+						salida[i].close();
+					}
+					for (int i = 0; i < lecturas.length; i++) {
+						lecturas[i].close();
+					}
 
-						for (int i = 0; i < N2; i++) {
-							File a;
-							a = f[i];
-							f[i] = f[i + N2];
-							f[i + N2] = a;
-
-						}
-						escritura = N;
-						long x = f0.length();
-						long y = f[N2].length();
-						if (x == y) {
-							t = 0;
-							Respuesta();
-						}
+					for (int i = 0; i < N2; i++) {
+						File a;
+						a = f[i];
+						f[i] = f[i + N2];
+						f[i + N2] = a;
 
 					}
+					escritura = N;
+
+					if (f0.length() == f[N2].length()) {
+
+						Respuesta();
+					}
+
 				}
 			}
 		}
@@ -285,9 +274,8 @@ public class MezclaComp {
 		br.close();
 	}
 
-	public static void creacion(String[] a) throws nopar, IOException, inicalNulo {
-		if (a.length == 0 || a == null)
-			throw new inicalNulo();
+	public static void creacion(String[] a) throws nopar, IOException {
+
 		if (N % 2 != 0 && N > 2) {
 			throw new nopar();
 		} else {
