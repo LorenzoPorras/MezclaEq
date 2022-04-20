@@ -25,15 +25,15 @@ public class MezclaComp {
 
 	public static void main(String[] args) {
 
-		Comparable[] a = {  };
+		String[] a = {};
 		long timeInicio;
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-//		for (int i = 0; i < 20; i++) {
-//			a = Arrays.copyOf(a, a.length + 1);
-//			a[i] = new Persona1("Xd", (int) (1 + 1000 * Math.random()));
-//		}
+		for (int i = 0; i < 20; i++) {
+			a = Arrays.copyOf(a, a.length + 1);
+			a[i] = "Xd-"+ (int) (1 + 10 * Math.random());
+		}
 
 		timeFin = System.currentTimeMillis();
 		System.out.println("Escrito en : " + (timeFin - timeInicio));
@@ -51,7 +51,7 @@ public class MezclaComp {
 
 //			escribir(f0);
 //			System.out.println();
-		escribir(fRespuesta);
+			escribir(fRespuesta);
 
 		} catch (nopar | IOException | inicalNulo e) {
 
@@ -63,7 +63,7 @@ public class MezclaComp {
 	public static void Ordenar() throws IOException {
 		repartir();
 
-		Comparable valores[] = new Comparable[N2];
+		String valores[] = new String[N2];
 		PrintWriter salida[] = new PrintWriter[N];
 
 		boolean[] activos = new boolean[N2];
@@ -95,7 +95,7 @@ public class MezclaComp {
 			while (escritura < N) {
 				if (verificarExistencia(valores) == false) {
 					for (int i = 0; i < valores.length; i++) {
-						Comparable a = lecturas[i].readLine();
+						String a = lecturas[i].readLine();
 						if (a != null) {
 							valores[i] = a;
 							activos[i] = true;
@@ -108,11 +108,10 @@ public class MezclaComp {
 				}
 
 				while (finDeTramo(activos)) {
-					t++;
 
 					int dato = pos(valores, activos);
 					if (dato >= 0) {
-						Comparable sig = lecturas[dato].readLine();
+						String sig = lecturas[dato].readLine();
 
 						if (sig == null || valores[dato].compareTo(sig) > 0) {
 							salida[escritura].println(valores[dato]);
@@ -165,7 +164,7 @@ public class MezclaComp {
 
 	}
 
-	public static boolean verificarExistencia(Comparable[] a) {
+	public static boolean verificarExistencia(String[] a) {
 		int i = 0;
 		while (i < a.length && a[i] == null)
 			i++;
@@ -186,13 +185,13 @@ public class MezclaComp {
 			return false;
 	}
 
-	public static int pos(Comparable[] a, boolean[] b) {
+	public static int pos(String[] a, boolean[] b) {
 		int pos = 0;
 		int n = 0;
 		while (n < a.length && b[n] != true)
 			n++;
 		if (n < a.length) {
-			Comparable anterior = a[n];
+			String anterior = a[n];
 
 			for (int i = 0; i < a.length; i++) {
 
@@ -220,7 +219,7 @@ public class MezclaComp {
 		}
 		FileReader fr = new FileReader(f0);
 		BufferedReader br = new BufferedReader(fr);
-		Comparable inicial = br.readLine();
+		String inicial = br.readLine();
 		int cantidad = 0;
 		int pos = 0;
 		salida[pos].println(inicial);
@@ -261,25 +260,25 @@ public class MezclaComp {
 		br.close();
 	}
 
-	public static void creacion(Comparable[] a) throws nopar, IOException, inicalNulo {
-//		if (a.length == 0 || a == null)
-//			throw new inicalNulo();
+	public static void creacion(String[] a) throws nopar, IOException, inicalNulo {
+		if (a.length == 0 || a == null)
+			throw new inicalNulo();
 		if (N % 2 != 0 && N > 2) {
 			throw new nopar();
 		} else {
-//			FileWriter fichero = null;
-//			PrintWriter pw = null;
+			FileWriter fichero = null;
+			PrintWriter pw = null;
 			f0 = new File("ArchivoOrigen.txt");
 			for (int i = 0; i < N; i++)
 				f[i] = new File("ar" + i + ".txt");
 
-//			fichero = new FileWriter(f0);
-//			pw = new PrintWriter(fichero);
-//
-//			for (int i = 0; i < a.length; i++)
-//				pw.println(a[i]);
-//
-//			fichero.close();
+			fichero = new FileWriter(f0);
+			pw = new PrintWriter(fichero);
+
+			for (int i = 0; i < a.length; i++)
+				pw.println(a[i]);
+
+			fichero.close();
 
 		}
 
@@ -289,16 +288,14 @@ public class MezclaComp {
 		File archivo = f;
 		FileReader fr = null;
 		BufferedReader br = null;
-		
-			fr = new FileReader(archivo);
-			br = new BufferedReader(fr);
-			String linea;
-			while ((linea = br.readLine()) != null) {
-				System.out.print(linea + " ");
-			}
-			br.close();
-		
+
+		fr = new FileReader(archivo);
+		br = new BufferedReader(fr);
+		String linea;
+		while ((linea = br.readLine()) != null) {
+			System.out.print(linea + " ");
 		}
+		br.close();
+
 	}
-
-
+}

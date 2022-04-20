@@ -32,11 +32,12 @@ public class Persona1 implements Comparable<Persona1> {
 //		 return nombre.compareTo(o.getNombre() );
 //		return edad -o.getEdad();
 
-		if (edad - o.getEdad() == 0)
-			return nombre.compareTo(o.getNombre());
-		else
-
-			return edad - o.getEdad();
+//		if (edad - o.getEdad() == 0)
+//			return nombre.compareTo(o.getNombre());
+//		else
+//
+//			return edad - o.getEdad();
+		return 0;
 	}
 
 	@Override
