@@ -25,15 +25,15 @@ public class MezclaComp {
 
 	public static void main(String[] args) {
 
-		Comparable[] a = {};
+		Comparable[] a = {  };
 		long timeInicio;
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-		for (int i = 0; i < 200000; i++) {
-			a = Arrays.copyOf(a, a.length + 1);
-			a[i] = new Persona1("Xd", (int) (1 + 1000 * Math.random()));
-		}
+//		for (int i = 0; i < 20; i++) {
+//			a = Arrays.copyOf(a, a.length + 1);
+//			a[i] = new Persona1("Xd", (int) (1 + 1000 * Math.random()));
+//		}
 
 		timeFin = System.currentTimeMillis();
 		System.out.println("Escrito en : " + (timeFin - timeInicio));
@@ -51,7 +51,7 @@ public class MezclaComp {
 
 //			escribir(f0);
 //			System.out.println();
-//			escribir(f[N2]);
+		escribir(fRespuesta);
 
 		} catch (nopar | IOException | inicalNulo e) {
 
@@ -61,7 +61,7 @@ public class MezclaComp {
 	}
 
 	public static void Ordenar() throws IOException {
-		int parada = repartir();
+		repartir();
 
 		Comparable valores[] = new Comparable[N2];
 		PrintWriter salida[] = new PrintWriter[N];
@@ -95,7 +95,7 @@ public class MezclaComp {
 			while (escritura < N) {
 				if (verificarExistencia(valores) == false) {
 					for (int i = 0; i < valores.length; i++) {
-						String a = lecturas[i].readLine();
+						Comparable a = lecturas[i].readLine();
 						if (a != null) {
 							valores[i] = a;
 							activos[i] = true;
@@ -210,7 +210,7 @@ public class MezclaComp {
 
 	}
 
-	public static int repartir() throws IOException {
+	public static void repartir() throws IOException {
 
 		PrintWriter salida[] = new PrintWriter[N];
 		for (int i = 0; i < N; i++) {
@@ -241,11 +241,11 @@ public class MezclaComp {
 			salida[i].close();
 		}
 		br.close();
-		return cantidad;
+
 	}
 
 	public static void Respuesta() throws IOException {
-	
+
 		fRespuesta = new File("Respuesta.txt");
 		FileWriter fichero = new FileWriter(fRespuesta);
 		fichero.close();
@@ -262,51 +262,43 @@ public class MezclaComp {
 	}
 
 	public static void creacion(Comparable[] a) throws nopar, IOException, inicalNulo {
-		if (a.length == 0 || a == null)
-			throw new inicalNulo();
+//		if (a.length == 0 || a == null)
+//			throw new inicalNulo();
 		if (N % 2 != 0 && N > 2) {
 			throw new nopar();
 		} else {
-			FileWriter fichero = null;
-			PrintWriter pw = null;
+//			FileWriter fichero = null;
+//			PrintWriter pw = null;
 			f0 = new File("ArchivoOrigen.txt");
 			for (int i = 0; i < N; i++)
 				f[i] = new File("ar" + i + ".txt");
 
-			fichero = new FileWriter(f0);
-			pw = new PrintWriter(fichero);
-
-			for (int i = 0; i < a.length; i++)
-				pw.println(a[i]);
-
-			fichero.close();
+//			fichero = new FileWriter(f0);
+//			pw = new PrintWriter(fichero);
+//
+//			for (int i = 0; i < a.length; i++)
+//				pw.println(a[i]);
+//
+//			fichero.close();
 
 		}
 
 	}
 
-	public static void escribir(File f) {
+	public static void escribir(File f) throws IOException, FileNotFoundException {
 		File archivo = f;
 		FileReader fr = null;
 		BufferedReader br = null;
-		try {
+		
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 			String linea;
 			while ((linea = br.readLine()) != null) {
 				System.out.print(linea + " ");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (null != fr) {
-					fr.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			br.close();
+		
 		}
 	}
 
-}
+

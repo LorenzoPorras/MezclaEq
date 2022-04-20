@@ -1,7 +1,6 @@
 package mezcla;
 
-
-public class Persona1 implements Comparable <Persona1> {
+public class Persona1 implements Comparable<Persona1> {
 	private String nombre;
 	private int edad;
 
@@ -43,8 +42,7 @@ public class Persona1 implements Comparable <Persona1> {
 	@Override
 	public String toString() {
 		return nombre + "-" + edad;
-	
 
-}
+	}
 
 }
