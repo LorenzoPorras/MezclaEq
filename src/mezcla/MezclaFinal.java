@@ -9,7 +9,7 @@ class nopar extends Exception {
 	}
 }
 
-public class MezclaComp {
+public class MezclaFinal {
 
 	private static int N = 6;
 	private static int N2 = N / 2;
@@ -24,7 +24,7 @@ public class MezclaComp {
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 10; i++) {
 			a = Arrays.copyOf(a, a.length + 1);
 			a[i] = "Xd-" + (int) (1 + 10 * Math.random());
 		}
@@ -283,6 +283,8 @@ public class MezclaComp {
 			f0 = new File("ArchivoOrigen.txt");
 			for (int i = 0; i < N; i++)
 				f[i] = new File("ar" + i + ".txt");
+			// Esto se puede quitar si ya tienes el archivo
+
 			FileWriter fichero = null;
 			PrintWriter pw = null;
 			fichero = new FileWriter(f0);
