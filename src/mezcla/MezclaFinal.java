@@ -24,9 +24,9 @@ public class MezclaFinal {
 		long timeFin;
 		timeInicio = System.currentTimeMillis();
 
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < 20000; i++) {
 			a = Arrays.copyOf(a, a.length + 1);
-			a[i] = "Xd-" + (int) (1 + 10 * Math.random());
+			a[i] = "Xd-" + (int) (1 + 10000 * Math.random());
 		}
 
 		timeFin = System.currentTimeMillis();
